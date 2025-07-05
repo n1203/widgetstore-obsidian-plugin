@@ -54,20 +54,26 @@ export class WidgetService {
         }
 
         try {
-            const queryParams = new URLSearchParams();
-            if (params.type) queryParams.append('type', params.type);
-            if (params.page) queryParams.append('page', params.page.toString());
-            if (params.limit) queryParams.append('limit', params.limit.toString());
-
             const headers = await this.authService.getHeaders();
+            const body: any = {
+                uid: this.plugin.settings.uid,
+                limit: params.limit || 1000,
+                order: 'updateTime'
+            };
+            
+            if (params.type) {
+                body.type = params.type;
+            }
+
             const response = await requestUrl({
-                url: `${this.baseUrl}/widgets/user?${queryParams.toString()}`,
-                method: 'GET',
-                headers
+                url: `${this.baseUrl}/widgets/user`,
+                method: 'POST',
+                headers,
+                body: JSON.stringify(body)
             });
 
-            const result: ApiResponse<UserWidget[]> = response.json;
-            if (result.code === 0 && result.data) {
+            const result = response.json;
+            if (result.success && result.data) {
                 return result.data;
             }
         } catch (error) {
