@@ -364,9 +364,16 @@ export class MyWidgetsView extends ItemView {
 
         menu.addItem(item => {
             item
+                .setTitle('复制组件代码')
+                .setIcon('copy')
+                .onClick(() => this.copyWidgetCode(userWidget._id));
+        });
+
+        menu.addItem(item => {
+            item
                 .setTitle('预览组件')
                 .setIcon('eye')
-                .onClick(() => this.previewWidget(userWidget._id, widget.title || userWidget.title || '组件'));
+                .onClick(() => this.previewWidget(userWidget.widgetId || widget._id || userWidget._id, widget.title || userWidget.title || '组件'));
         });
 
         menu.addItem(item => {
@@ -411,6 +418,13 @@ export class MyWidgetsView extends ItemView {
                     .onClick(() => this.addWidget(widget));
             });
         }
+
+        menu.addItem(item => {
+            item
+                .setTitle('复制组件代码')
+                .setIcon('copy')
+                .onClick(() => this.copyWidgetCode(widget._id));
+        });
 
         menu.addItem(item => {
             item
@@ -465,25 +479,57 @@ export class MyWidgetsView extends ItemView {
 
     private async previewWidget(widgetId: string, title: string) {
         // 创建预览模态框
-        const modal = this.app.workspace.activeLeaf?.view.containerEl.createDiv({
-            cls: 'modal-container'
-        });
-        
-        if (!modal) return;
-
+        const modal = document.body.createDiv({ cls: 'modal-container' });
         const modalBg = modal.createDiv({ cls: 'modal-bg' });
         const modalContent = modal.createDiv({ cls: 'modal widgetstore-preview-modal' });
         
         modalContent.createEl('h2', { text: title });
         
         const preview = modalContent.createDiv({ cls: 'widgetstore-preview' });
-        const html = await this.plugin.widgetService.getWidgetHtml(widgetId);
+        preview.style.height = '400px';
+        preview.style.display = 'flex';
+        preview.style.alignItems = 'center';
+        preview.style.justifyContent = 'center';
         
-        if (html) {
+        // 显示加载状态
+        const loading = preview.createDiv({ cls: 'widgetstore-loading' });
+        loading.createDiv({ cls: 'widgetstore-spinner' });
+        
+        try {
+            // 获取用户组件数据以获取完整的 ID
+            const userWidgets = await this.plugin.widgetService.getUserWidgets();
+            const userWidget = userWidgets.find(uw => 
+                uw._id === widgetId || 
+                uw.widgetId === widgetId || 
+                uw.widgets?.some(w => w._id === widgetId)
+            );
+            
+            let previewId = widgetId;
+            if (userWidget) {
+                // 使用 widgetId.用户组件ID 格式
+                const actualWidgetId = userWidget.widgetId || userWidget.widgets?.[0]?._id || widgetId;
+                previewId = `${actualWidgetId}.${userWidget._id}`;
+            }
+            
+            // 使用正确的预览 URL 格式
+            const url = `https://cn.widgetstore.net/view/index.html?q=${previewId}`;
             const iframe = preview.createEl('iframe');
             iframe.style.width = '100%';
-            iframe.style.height = '400px';
-            iframe.srcdoc = html;
+            iframe.style.height = '100%';
+            iframe.style.border = 'none';
+            iframe.src = url;
+            
+            // iframe 加载完成后移除加载状态
+            iframe.onload = () => {
+                loading.remove();
+            };
+        } catch (error) {
+            console.error('预览组件失败:', error);
+            loading.remove();
+            preview.createDiv({ 
+                cls: 'widgetstore-empty',
+                text: '预览加载失败' 
+            });
         }
 
         const closeBtn = modalContent.createEl('button', {
@@ -497,6 +543,7 @@ export class MyWidgetsView extends ItemView {
     }
 
     private async insertWidget(widgetId: string, title: string) {
+        // 使用最稳定的方式获取当前活动的 markdown 视图
         const activeView = this.app.workspace.getActiveViewOfType(MarkdownView);
         if (!activeView) {
             new Notice('请先打开一个 Markdown 文件');
@@ -504,6 +551,11 @@ export class MyWidgetsView extends ItemView {
         }
 
         const editor = activeView.editor;
+        if (!editor) {
+            new Notice('无法获取编辑器');
+            return;
+        }
+        
         let insertText = '';
 
         switch (this.plugin.settings.defaultInsertFormat) {
@@ -511,26 +563,49 @@ export class MyWidgetsView extends ItemView {
                 insertText = `\`\`\`widgetstore\n${widgetId}\n\`\`\`\n`;
                 break;
             case 'iframe':
-                const url = `https://cn.widgetstore.net/widget/${widgetId}`;
+                // 获取完整的预览 ID
+                const userWidgets = await this.plugin.widgetService.getUserWidgets();
+                const userWidget = userWidgets.find(uw => uw._id === widgetId);
+                let previewId = widgetId;
+                if (userWidget) {
+                    const actualWidgetId = userWidget.widgetId || userWidget.widgets?.[0]?._id || widgetId;
+                    previewId = `${actualWidgetId}.${userWidget._id}`;
+                }
+                const url = `https://cn.widgetstore.net/view/index.html?q=${previewId}`;
                 insertText = `<iframe src="${url}" width="${this.plugin.settings.widgetWidth}" height="${this.plugin.settings.widgetHeight}" frameborder="0"></iframe>\n`;
                 break;
             case 'html':
-                const html = await this.plugin.widgetService.getWidgetHtml(widgetId);
-                insertText = `${html}\n`;
+                // HTML 模式暂时使用 iframe
+                const userWidgetsHtml = await this.plugin.widgetService.getUserWidgets();
+                const userWidgetHtml = userWidgetsHtml.find(uw => uw._id === widgetId);
+                let previewIdHtml = widgetId;
+                if (userWidgetHtml) {
+                    const actualWidgetId = userWidgetHtml.widgetId || userWidgetHtml.widgets?.[0]?._id || widgetId;
+                    previewIdHtml = `${actualWidgetId}.${userWidgetHtml._id}`;
+                }
+                const htmlUrl = `https://cn.widgetstore.net/view/index.html?q=${previewIdHtml}`;
+                insertText = `<iframe src="${htmlUrl}" width="${this.plugin.settings.widgetWidth}" height="${this.plugin.settings.widgetHeight}" frameborder="0"></iframe>\n`;
+                new Notice('HTML 模式暂时使用 iframe 方式插入');
                 break;
         }
 
-        editor.replaceSelection(insertText);
+        // 获取当前光标位置
+        const cursor = editor.getCursor();
+        editor.replaceRange(insertText, cursor);
+        
+        // 移动光标到插入内容之后
+        const newCursor = {
+            line: cursor.line + insertText.split('\n').length - 1,
+            ch: 0
+        };
+        editor.setCursor(newCursor);
+        
         new Notice(`已插入组件: ${title}`);
     }
 
     private confirmDelete(userWidget: UserWidget) {
         const widget = userWidget.widgets?.[0] || userWidget;
-        const modal = this.app.workspace.activeLeaf?.view.containerEl.createDiv({
-            cls: 'modal-container'
-        });
-        
-        if (!modal) return;
+        const modal = document.body.createDiv({ cls: 'modal-container' });
 
         const modalBg = modal.createDiv({ cls: 'modal-bg' });
         const modalContent = modal.createDiv({ cls: 'modal' });
@@ -583,6 +658,33 @@ export class MyWidgetsView extends ItemView {
     async refresh() {
         // Always re-render the view to update login status
         await this.onOpen();
+    }
+
+    private async copyWidgetCode(widgetId: string) {
+        const format = this.plugin.settings.defaultInsertFormat;
+        let codeText = '';
+        
+        switch (format) {
+            case 'widgetstore':
+                codeText = `\`\`\`widgetstore\n${widgetId}\n\`\`\``;
+                break;
+            case 'iframe':
+            case 'html':
+                // 获取完整的预览 ID
+                const userWidgets = await this.plugin.widgetService.getUserWidgets();
+                const userWidget = userWidgets.find(uw => uw._id === widgetId);
+                let previewId = widgetId;
+                if (userWidget) {
+                    const actualWidgetId = userWidget.widgetId || userWidget.widgets?.[0]?._id || widgetId;
+                    previewId = `${actualWidgetId}.${userWidget._id}`;
+                }
+                const url = `https://cn.widgetstore.net/view/index.html?q=${previewId}`;
+                codeText = `<iframe src="${url}" width="${this.plugin.settings.widgetWidth}" height="${this.plugin.settings.widgetHeight}" frameborder="0"></iframe>`;
+                break;
+        }
+        
+        navigator.clipboard.writeText(codeText);
+        new Notice(`组件代码已复制到剪贴板 (${format} 格式)`);
     }
 
     async onClose() {

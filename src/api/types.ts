@@ -16,6 +16,7 @@ export interface Widget {
 
 export interface UserWidget extends Widget {
     widgetId: string;
+    widgets?: Widget[];
 }
 
 export interface User {

@@ -127,21 +127,36 @@ export default class WidgetStorePlugin extends Plugin {
                 // 创建容器
                 const container = el.createEl('div', { cls: 'widgetstore-preview' });
                 
-                // 加载组件
-                const html = await this.widgetService.getWidgetHtml(widgetId);
-                if (html) {
-                    const iframe = container.createEl('iframe');
-                    iframe.style.width = this.settings.widgetWidth;
-                    iframe.style.height = this.settings.widgetHeight;
-                    
-                    // 设置 iframe 内容
-                    iframe.srcdoc = html;
-                } else {
+                // 尝试获取用户组件信息以构建正确的预览 URL
+                let previewId = widgetId;
+                if (this.authService.isAuthenticated()) {
+                    try {
+                        const userWidgets = await this.widgetService.getUserWidgets();
+                        const userWidget = userWidgets.find(uw => uw._id === widgetId);
+                        if (userWidget) {
+                            const actualWidgetId = userWidget.widgetId || userWidget.widgets?.[0]?._id || widgetId;
+                            previewId = `${actualWidgetId}.${userWidget._id}`;
+                        }
+                    } catch (error) {
+                        console.log('获取用户组件信息失败，使用默认 ID');
+                    }
+                }
+                
+                // 创建 iframe 直接加载组件
+                const iframe = container.createEl('iframe');
+                iframe.style.width = this.settings.widgetWidth;
+                iframe.style.height = this.settings.widgetHeight;
+                iframe.style.border = 'none';
+                iframe.src = `https://cn.widgetstore.net/view/index.html?q=${previewId}`;
+                
+                // 添加加载失败处理
+                iframe.onerror = () => {
+                    container.empty();
                     container.createEl('div', { 
-                        text: '无法加载组件', 
+                        text: '组件加载失败', 
                         cls: 'widgetstore-error' 
                     });
-                }
+                };
             } catch (error) {
                 console.error('渲染组件失败:', error);
                 el.createEl('div', { 
