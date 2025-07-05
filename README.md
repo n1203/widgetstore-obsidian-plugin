@@ -1,10 +1,9 @@
 # Widget Store for Obsidian
 
-[![Build and Release](https://github.com/yourusername/widgetstore-obsidian/actions/workflows/release.yml/badge.svg)](https://github.com/yourusername/widgetstore-obsidian/actions/workflows/release.yml)
-[![Latest Release](https://img.shields.io/github/v/release/yourusername/widgetstore-obsidian)](https://github.com/yourusername/widgetstore-obsidian/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/yourusername/widgetstore-obsidian/total)](https://github.com/yourusername/widgetstore-obsidian/releases)
-[![GitHub Stars](https://img.shields.io/github/stars/yourusername/widgetstore-obsidian?style=social)](https://github.com/yourusername/widgetstore-obsidian/stargazers)
-[![License](https://img.shields.io/github/license/yourusername/widgetstore-obsidian)](https://github.com/yourusername/widgetstore-obsidian/blob/main/LICENSE)
+[![Latest Release](https://img.shields.io/github/v/release/kuai-dian/obsidian)](https://github.com/kuai-dian/obsidian/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/kuai-dian/obsidian/total)](https://github.com/kuai-dian/obsidian/releases)
+[![GitHub Stars](https://img.shields.io/github/stars/kuai-dian/obsidian?style=social)](https://github.com/kuai-dian/obsidian/stargazers)
+[![License](https://img.shields.io/github/license/kuai-dian/obsidian)](https://github.com/kuai-dian/obsidian/blob/main/LICENSE)
 
 将[组件世界](https://cn.widgetstore.net)的丰富组件资源直接集成到 Obsidian 中。
 
@@ -12,10 +11,14 @@
   
   **如果这个项目对你有帮助，请给个 Star ⭐ 支持一下！**
   
-  <a href="https://github.com/yourusername/widgetstore-obsidian/stargazers">
-    <img src="https://img.shields.io/github/stars/yourusername/widgetstore-obsidian?style=for-the-badge&logo=github&color=yellow" alt="GitHub stars">
+  <a href="https://github.com/kuai-dian/obsidian/stargazers">
+    <img src="https://img.shields.io/github/stars/kuai-dian/obsidian?style=for-the-badge&logo=github&color=yellow" alt="GitHub stars">
   </a>
   
+</div>
+
+<div align="center">
+  <img src="./public/thumbnail.gif" alt="Widget Store for Obsidian 演示" width="800">
 </div>
 
 ## 功能特性
@@ -31,7 +34,7 @@
 
 ### 手动安装
 
-1. 从 [Releases](https://github.com/yourusername/widgetstore-obsidian/releases/latest) 下载最新版本
+1. 从 [Releases](https://github.com/kuai-dian/obsidian/releases/latest) 下载最新版本
 2. 解压 `widgetstore-*.zip` 到 Obsidian 插件目录：`<vault>/.obsidian/plugins/widgetstore/`
 3. 重启 Obsidian
 4. 在设置中启用插件
@@ -144,7 +147,7 @@ widgetstore-obsidian/
 
 ## 反馈与支持
 
-- 问题反馈：[GitHub Issues](https://github.com/yourusername/widgetstore-obsidian/issues)
+- 问题反馈：[GitHub Issues](https://github.com/kuai-dian/obsidian/issues)
 - 组件世界官网：[https://cn.widgetstore.net](https://cn.widgetstore.net)
 - 变更日志：[CHANGELOG.md](CHANGELOG.md)
 

@@ -52,29 +52,29 @@ export class MyWidgetsView extends ItemView {
         header.createEl('h3', { text: '我的组件' });
 
         // 创建视图切换
-        const viewSwitcher = container.createDiv({ cls: 'widgetstore-view-switcher' });
-        const mineBtn = viewSwitcher.createEl('button', {
-            cls: `widgetstore-view-btn ${this.currentView === 'mine' ? 'active' : ''}`,
-            text: '我的组件'
-        });
-        const storeBtn = viewSwitcher.createEl('button', {
-            cls: `widgetstore-view-btn ${this.currentView === 'store' ? 'active' : ''}`,
-            text: '组件商店'
-        });
+        // const viewSwitcher = container.createDiv({ cls: 'widgetstore-view-switcher' });
+        // const mineBtn = viewSwitcher.createEl('button', {
+        //     cls: `widgetstore-view-btn ${this.currentView === 'mine' ? 'active' : ''}`,
+        //     text: '我的组件'
+        // });
+        // const storeBtn = viewSwitcher.createEl('button', {
+        //     cls: `widgetstore-view-btn ${this.currentView === 'store' ? 'active' : ''}`,
+        //     text: '组件商店'
+        // });
 
-        mineBtn.addEventListener('click', () => {
-            this.currentView = 'mine';
-            mineBtn.addClass('active');
-            storeBtn.removeClass('active');
-            this.loadData();
-        });
+        // mineBtn.addEventListener('click', () => {
+        //     this.currentView = 'mine';
+        //     mineBtn.addClass('active');
+        //     // storeBtn.removeClass('active');
+        //     this.loadData();
+        // });
 
-        storeBtn.addEventListener('click', () => {
-            this.currentView = 'store';
-            storeBtn.addClass('active');
-            mineBtn.removeClass('active');
-            this.loadData();
-        });
+        // storeBtn.addEventListener('click', () => {
+        //     this.currentView = 'store';
+        //     storeBtn.addClass('active');
+        //     mineBtn.removeClass('active');
+        //     this.loadData();
+        // });
 
         // 搜索框（仅在商店视图显示）
         if (this.currentView === 'store') {
@@ -97,7 +97,6 @@ export class MyWidgetsView extends ItemView {
         this.createTab(tabs, '基础组件', 'basic');
         this.createTab(tabs, '图标组件', 'icon');
         this.createTab(tabs, '背景组件', 'background');
-        this.createTab(tabs, '图表组件', 'chart');
 
         // 组件列表容器
         this.containerEl = container.createDiv({ cls: 'widgetstore-widget-list' });
@@ -215,8 +214,8 @@ export class MyWidgetsView extends ItemView {
                 text: '浏览组件商店'
             });
             addBtn.addEventListener('click', () => {
-                this.currentView = 'store';
-                this.onOpen();
+                // 打开组件世界网站
+                window.open('https://cn.widgetstore.net', '_blank');
             });
             return;
         }
@@ -355,12 +354,12 @@ export class MyWidgetsView extends ItemView {
         const widget = userWidget.widgets?.[0] || userWidget;
         const menu = new Menu();
 
-        menu.addItem(item => {
-            item
-                .setTitle('插入到当前文档')
-                .setIcon('plus')
-                .onClick(() => this.insertWidget(userWidget._id, widget.title || userWidget.title || '组件'));
-        });
+        // menu.addItem(item => {
+        //     item
+        //         .setTitle('插入到当前文档')
+        //         .setIcon('plus')
+        //         .onClick(() => this.insertWidget(userWidget._id, widget.title || userWidget.title || '组件'));
+        // });
 
         menu.addItem(item => {
             item
@@ -397,12 +396,12 @@ export class MyWidgetsView extends ItemView {
                 });
         });
 
-        menu.addItem(item => {
-            item
-                .setTitle('删除组件')
-                .setIcon('trash')
-                .onClick(() => this.confirmDelete(userWidget));
-        });
+        // menu.addItem(item => {
+        //     item
+        //         .setTitle('删除组件')
+        //         .setIcon('trash')
+        //         .onClick(() => this.confirmDelete(userWidget));
+        // });
 
         menu.showAtMouseEvent(event);
     }
