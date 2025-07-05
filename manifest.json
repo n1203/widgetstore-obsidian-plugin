@@ -1,7 +1,7 @@
 {
 	"id": "widgetstore",
 	"name": "Widget Store",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"minAppVersion": "0.15.0",
 	"description": "Access and manage widgets from cn.widgetstore.net directly in Obsidian",
 	"author": "Widget Store Team",
