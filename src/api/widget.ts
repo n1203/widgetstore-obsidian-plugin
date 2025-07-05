@@ -216,4 +216,66 @@ export class WidgetService {
 
         return '';
     }
+
+    /**
+     * 获取组件列表（新版本API）
+     */
+    async getWidgets(params: any = {}): Promise<Widget[]> {
+        try {
+            const queryParams = new URLSearchParams();
+            queryParams.append('order', params.order || 'createTime');
+            queryParams.append('limit', (params.limit || 1000).toString());
+            if (params.category) queryParams.append('category', params.category);
+            if (params.search) queryParams.append('search', params.search);
+            if (params.type) queryParams.append('type', params.type);
+
+            const response = await requestUrl({
+                url: `${this.baseUrl}/widgets?${queryParams.toString()}`,
+                method: 'GET',
+                headers: {
+                    'accept': 'application/json, text/plain, */*',
+                    'origin': 'https://cn.widgetstore.net',
+                    'referer': 'https://cn.widgetstore.net/'
+                }
+            });
+
+            const result = response.json;
+            if (result.success && result.data) {
+                return result.data;
+            }
+        } catch (error) {
+            console.error('获取组件列表失败:', error);
+        }
+
+        return [];
+    }
+
+    /**
+     * 添加组件到用户空间
+     */
+    async addUserWidget(widgetId: string): Promise<boolean> {
+        if (!this.authService.isAuthenticated()) {
+            return false;
+        }
+
+        try {
+            const headers = await this.authService.getHeaders();
+            const response = await requestUrl({
+                url: `${this.baseUrl}/widgets/user/add`,
+                method: 'POST',
+                headers,
+                body: JSON.stringify({
+                    widgetId,
+                    uid: this.plugin.settings.uid
+                })
+            });
+
+            const result = response.json;
+            return result.success === true;
+        } catch (error) {
+            console.error('添加用户组件失败:', error);
+        }
+
+        return false;
+    }
 }

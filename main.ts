@@ -11,8 +11,7 @@ import {
 import { AuthService } from './src/api/auth';
 import { WidgetService } from './src/api/widget';
 import { AuthToken, User } from './src/api/types';
-import { WidgetBrowserView, VIEW_TYPE_WIDGET_BROWSER } from './src/views/WidgetBrowser';
-import { WidgetManagerView, VIEW_TYPE_WIDGET_MANAGER } from './src/views/WidgetManager';
+import { MyWidgetsView, VIEW_TYPE_MY_WIDGETS } from './src/views/MyWidgets';
 
 interface WidgetStoreSettings {
     authToken?: AuthToken;
@@ -47,34 +46,21 @@ export default class WidgetStorePlugin extends Plugin {
 
         // 注册视图
         this.registerView(
-            VIEW_TYPE_WIDGET_BROWSER,
-            (leaf) => new WidgetBrowserView(leaf, this)
-        );
-
-        this.registerView(
-            VIEW_TYPE_WIDGET_MANAGER,
-            (leaf) => new WidgetManagerView(leaf, this)
+            VIEW_TYPE_MY_WIDGETS,
+            (leaf) => new MyWidgetsView(leaf, this)
         );
 
         // 添加功能区图标
-        this.addRibbonIcon('box', 'Widget Store', () => {
-            this.activateView(VIEW_TYPE_WIDGET_BROWSER);
+        this.addRibbonIcon('box', '我的组件', () => {
+            this.activateView(VIEW_TYPE_MY_WIDGETS);
         });
 
         // 添加命令
         this.addCommand({
-            id: 'open-widget-browser',
-            name: '打开组件浏览器',
-            callback: () => {
-                this.activateView(VIEW_TYPE_WIDGET_BROWSER);
-            }
-        });
-
-        this.addCommand({
-            id: 'open-widget-manager',
+            id: 'open-my-widgets',
             name: '打开我的组件',
             callback: () => {
-                this.activateView(VIEW_TYPE_WIDGET_MANAGER);
+                this.activateView(VIEW_TYPE_MY_WIDGETS);
             }
         });
 
@@ -96,11 +82,8 @@ export default class WidgetStorePlugin extends Plugin {
                 if (success) {
                     console.log('认证成功，刷新视图');
                     // 刷新视图
-                    this.app.workspace.getLeavesOfType(VIEW_TYPE_WIDGET_BROWSER).forEach(leaf => {
-                        (leaf.view as WidgetBrowserView).refresh();
-                    });
-                    this.app.workspace.getLeavesOfType(VIEW_TYPE_WIDGET_MANAGER).forEach(leaf => {
-                        (leaf.view as WidgetManagerView).refresh();
+                    this.app.workspace.getLeavesOfType(VIEW_TYPE_MY_WIDGETS).forEach(leaf => {
+                        (leaf.view as MyWidgetsView).refresh();
                     });
                 } else {
                     console.error('认证处理失败');
@@ -125,7 +108,7 @@ export default class WidgetStorePlugin extends Plugin {
                             .setTitle('插入组件')
                             .setIcon('box')
                             .onClick(() => {
-                                this.activateView(VIEW_TYPE_WIDGET_BROWSER);
+                                this.activateView(VIEW_TYPE_MY_WIDGETS);
                             });
                     });
                 }
@@ -174,8 +157,7 @@ export default class WidgetStorePlugin extends Plugin {
 
     onunload() {
         // 清理视图
-        this.app.workspace.detachLeavesOfType(VIEW_TYPE_WIDGET_BROWSER);
-        this.app.workspace.detachLeavesOfType(VIEW_TYPE_WIDGET_MANAGER);
+        this.app.workspace.detachLeavesOfType(VIEW_TYPE_MY_WIDGETS);
     }
 
     async loadSettings() {

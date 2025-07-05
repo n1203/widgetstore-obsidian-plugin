@@ -166,3 +166,98 @@
 .widgetstore-logout-button {
     margin-top: 12px;
 }
+
+/* 视图切换按钮 */
+.widgetstore-view-switcher {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+.widgetstore-view-btn {
+    flex: 1;
+    padding: 8px 16px;
+    border: 1px solid var(--background-modifier-border);
+    background: var(--background-secondary);
+    color: var(--text-normal);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.widgetstore-view-btn:hover {
+    background: var(--background-modifier-hover);
+}
+
+.widgetstore-view-btn.active {
+    background: var(--interactive-accent);
+    color: var(--text-on-accent);
+    border-color: var(--interactive-accent);
+}
+
+/* 搜索框样式优化 */
+.widgetstore-search {
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.widgetstore-search-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--background-modifier-border);
+    background: var(--background-primary);
+    color: var(--text-normal);
+    border-radius: 4px;
+}
+
+.widgetstore-search-input:focus {
+    outline: none;
+    border-color: var(--interactive-accent);
+}
+
+/* 组件元信息样式 */
+.widgetstore-widget-meta {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+    font-size: 0.85em;
+    color: var(--text-muted);
+}
+
+.widgetstore-widget-count,
+.widgetstore-widget-date,
+.widgetstore-widget-status {
+    display: flex;
+    align-items: center;
+}
+
+.widgetstore-widget-added {
+    opacity: 0.7;
+}
+
+.widgetstore-widget-status {
+    color: var(--interactive-accent);
+    font-weight: 500;
+}
+
+/* 用户信息增强样式 */
+.widgetstore-user-id,
+.widgetstore-admin-badge,
+.widgetstore-vip-info {
+    margin: 4px 0;
+}
+
+.widgetstore-admin-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--interactive-accent);
+    color: var(--text-on-accent);
+    border-radius: 12px;
+    font-size: 0.85em;
+}
+
+.widgetstore-vip-info {
+    color: var(--text-accent);
+    font-weight: 500;
+}
