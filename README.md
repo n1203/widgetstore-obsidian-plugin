@@ -2,10 +2,10 @@
 
 <div align="center">
   
-  [![Latest Release](https://img.shields.io/github/v/release/kuai-dian/obsidian?style=flat-square)](https://github.com/kuai-dian/obsidian/releases/latest)
-  [![Downloads](https://img.shields.io/github/downloads/kuai-dian/obsidian/total?style=flat-square)](https://github.com/kuai-dian/obsidian/releases)
-  [![GitHub Stars](https://img.shields.io/github/stars/kuai-dian/obsidian?style=flat-square)](https://github.com/kuai-dian/obsidian/stargazers)
-  [![License](https://img.shields.io/github/license/kuai-dian/obsidian?style=flat-square)](https://github.com/kuai-dian/obsidian/blob/main/LICENSE)
+  [![Latest Release](https://img.shields.io/github/v/release/n1203/widgetstore-obsidian-plugin?style=flat-square)](https://github.com/n1203/widgetstore-obsidian-plugin/releases/latest)
+  [![Downloads](https://img.shields.io/github/downloads/n1203/widgetstore-obsidian-plugin/total?style=flat-square)](https://github.com/n1203/widgetstore-obsidian-plugin/releases)
+  [![GitHub Stars](https://img.shields.io/github/stars/n1203/widgetstore-obsidian-plugin?style=flat-square)](https://github.com/n1203/widgetstore-obsidian-plugin/stargazers)
+  [![License](https://img.shields.io/github/license/n1203/widgetstore-obsidian-plugin?style=flat-square)](https://github.com/n1203/widgetstore-obsidian-plugin/blob/main/LICENSE)
   
 </div>
 
@@ -24,8 +24,8 @@
   
   ### ⭐ 如果这个项目对你有帮助，请给个 Star 支持一下！ ⭐
   
-  <a href="https://github.com/kuai-dian/obsidian/stargazers">
-    <img src="https://img.shields.io/github/stars/kuai-dian/obsidian?style=for-the-badge&logo=github&color=FFD700&labelColor=333333" alt="GitHub stars">
+  <a href="https://github.com/n1203/widgetstore-obsidian-plugin/stargazers">
+    <img src="https://img.shields.io/github/stars/n1203/widgetstore-obsidian-plugin?style=for-the-badge&logo=github&color=FFD700&labelColor=333333" alt="GitHub stars">
   </a>
   
   <br />
@@ -73,7 +73,7 @@
 
 ### 🔧 手动安装
 
-1. 从 [Releases](https://github.com/kuai-dian/obsidian/releases/latest) 下载最新版本 `widgetstore-*.zip`
+1. 从 [Releases](https://github.com/n1203/widgetstore-obsidian-plugin/releases/latest) 下载最新版本 `widgetstore-*.zip`
 2. 解压到 Obsidian 插件目录：`<vault>/.obsidian/plugins/widgetstore/`
 3. 重启 Obsidian
 4. 在 `设置 → 社区插件` 中启用 **Widget Store**
@@ -132,7 +132,7 @@
 
 ```bash
 # 克隆项目
-git clone https://github.com/kuai-dian/obsidian.git
+git clone https://github.com/n1203/widgetstore-obsidian-plugin.git
 cd obsidian
 
 # 安装依赖
@@ -180,8 +180,8 @@ yarn build
 
 <div align="center">
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/kuai-dian/obsidian/pulls)
-[![Issues](https://img.shields.io/github/issues/kuai-dian/obsidian?style=flat-square)](https://github.com/kuai-dian/obsidian/issues)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/n1203/widgetstore-obsidian-plugin/pulls)
+[![Issues](https://img.shields.io/github/issues/n1203/widgetstore-obsidian-plugin?style=flat-square)](https://github.com/n1203/widgetstore-obsidian-plugin/issues)
 
 </div>
 
@@ -195,7 +195,7 @@ yarn build
 
 | 渠道 | 链接 |
 |:---:|:---|
-| 💬 问题反馈 | [GitHub Issues](https://github.com/kuai-dian/obsidian/issues) |
+| 💬 问题反馈 | [GitHub Issues](https://github.com/n1203/widgetstore-obsidian-plugin/issues) |
 | 🌐 官方网站 | [https://cn.widgetstore.net](https://cn.widgetstore.net) |
 | 📋 更新日志 | [CHANGELOG.md](CHANGELOG.md) |
 
@@ -227,11 +227,11 @@ yarn build
 ## 🌟 Star 历史
 
 <div align="center">
-  <a href="https://star-history.com/#kuai-dian/obsidian&Date">
+  <a href="https://star-history.com/#n1203/widgetstore-obsidian-plugin&Date">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=kuai-dian/obsidian&type=Date&theme=dark" />
-      <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=kuai-dian/obsidian&type=Date" />
-      <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=kuai-dian/obsidian&type=Date" />
+      <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=n1203/widgetstore-obsidian-plugin&type=Date&theme=dark" />
+      <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=n1203/widgetstore-obsidian-plugin&type=Date" />
+      <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=n1203/widgetstore-obsidian-plugin&type=Date" />
     </picture>
   </a>
 </div>
