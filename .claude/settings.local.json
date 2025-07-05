@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:docs.obsidian.md)",
+      "Bash(npm install)",
+      "Bash(sudo chown:*)",
+      "Bash(yarn install)",
+      "Bash(yarn run:*)",
+      "Bash(ls:*)",
+      "Bash(rm:*)",
+      "Bash(find:*)",
+      "Bash(node:*)",
+      "Bash(yarn build)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(cat:*)",
+      "Bash(npm run build:*)"
+    ],
+    "deny": []
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "id": "widgetstore",
+  "name": "Widget Store",
+  "version": "1.0.0",
+  "minAppVersion": "0.15.0",
+  "description": "Access and manage widgets from cn.widgetstore.net directly in Obsidian",
+  "author": "Widget Store Team",
+  "authorUrl": "https://cn.widgetstore.net",
+  "fundingUrl": "https://cn.widgetstore.net/#/pricing",
+  "isDesktopOnly": false
+}
