@@ -16,7 +16,7 @@
     "widgetstore"
   ],
   "author": "Widget Store Team",
-  "license": "MIT",
+  "license": "Proprietary",
   "devDependencies": {
     "@types/node": "^16.11.6",
     "@typescript-eslint/eslint-plugin": "5.29.0",

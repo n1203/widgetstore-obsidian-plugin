@@ -1,0 +1,101 @@
+专有软件许可协议
+
+版权所有 (c) 2024 Widget Store Team。保留所有权利。
+
+重要提示：请仔细阅读本许可协议。使用、复制或分发本软件即表示您同意受本协议条款的约束。
+
+1. 定义
+   - "软件"指 Widget Store for Obsidian 插件及其所有相关文档、源代码、二进制文件和资源。
+   - "所有者"指 Widget Store Team 及其授权代表。
+   - "用户"指使用本软件的个人或实体。
+
+2. 许可授予
+   在遵守本协议条款的前提下，所有者授予用户以下有限的、不可转让的、非独占的许可：
+   a) 仅限个人非商业用途使用本软件
+   b) 仅可从官方仓库（https://github.com/kuai-dian/obsidian）下载和安装本软件
+
+3. 限制条款
+   用户明确同意不得进行以下行为：
+   a) 修改、改编、翻译或创建本软件的衍生作品
+   b) 对本软件进行逆向工程、反编译或反汇编
+   c) 出售、出租、许可、分发或以其他方式商业化利用本软件
+   d) 移除或修改本软件中的任何版权声明或其他所有权标记
+   e) 在任何其他项目中使用本软件的源代码或其任何部分
+   f) 创建本软件的分支（fork）用于开发独立项目
+
+4. 贡献条款
+   a) 任何向官方仓库提交的贡献（包括但不限于代码、文档、翻译）将自动转让给所有者
+   b) 贡献者保证其提交的内容不侵犯任何第三方权利
+   c) 所有者有权接受或拒绝任何贡献，无需说明理由
+
+5. 知识产权
+   本软件及其所有副本的所有权和知识产权始终归所有者所有。本协议不授予用户任何商标、服务标记或商号的使用权。
+
+6. 免责声明
+   本软件按"现状"提供，不提供任何形式的明示或暗示担保，包括但不限于对适销性、特定用途适用性和非侵权性的担保。所有者不对因使用或无法使用本软件而造成的任何损害承担责任。
+
+7. 终止
+   如果用户违反本协议的任何条款，本许可将自动终止。终止后，用户必须立即停止使用本软件并删除所有副本。
+
+8. 适用法律
+   本协议受中华人民共和国法律管辖，不考虑其法律冲突原则。
+
+9. 完整协议
+   本协议构成双方就本软件达成的完整协议，取代之前的所有口头或书面协议。
+
+10. 联系信息
+    如有任何问题，请联系：https://cn.widgetstore.net
+
+最后更新日期：2024年1月
+
+---
+
+PROPRIETARY SOFTWARE LICENSE AGREEMENT
+
+Copyright (c) 2024 Widget Store Team. All rights reserved.
+
+IMPORTANT: READ THIS LICENSE AGREEMENT CAREFULLY. BY USING, COPYING, OR DISTRIBUTING THIS SOFTWARE, YOU AGREE TO BE BOUND BY THE TERMS OF THIS AGREEMENT.
+
+1. Definitions
+   - "Software" means the Widget Store for Obsidian plugin and all related documentation, source code, binaries, and resources.
+   - "Owner" means Widget Store Team and its authorized representatives.
+   - "User" means any individual or entity using the Software.
+
+2. Grant of License
+   Subject to the terms of this Agreement, Owner grants User a limited, non-transferable, non-exclusive license to:
+   a) Use the Software for personal, non-commercial purposes only
+   b) Download and install the Software only from the official repository (https://github.com/kuai-dian/obsidian)
+
+3. Restrictions
+   User expressly agrees NOT to:
+   a) Modify, adapt, translate, or create derivative works of the Software
+   b) Reverse engineer, decompile, or disassemble the Software
+   c) Sell, rent, license, distribute, or otherwise commercially exploit the Software
+   d) Remove or modify any copyright notices or other proprietary markings
+   e) Use the Software's source code or any part thereof in any other project
+   f) Fork the Software for the purpose of developing an independent project
+
+4. Contributions
+   a) Any contributions submitted to the official repository (including but not limited to code, documentation, translations) are automatically assigned to Owner
+   b) Contributors warrant that their submissions do not infringe any third-party rights
+   c) Owner reserves the right to accept or reject any contribution without explanation
+
+5. Intellectual Property
+   All ownership and intellectual property rights in the Software and all copies thereof remain with Owner. This Agreement does not grant User any rights to use trademarks, service marks, or trade names.
+
+6. Disclaimer of Warranties
+   THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. OWNER SHALL NOT BE LIABLE FOR ANY DAMAGES ARISING FROM THE USE OR INABILITY TO USE THE SOFTWARE.
+
+7. Termination
+   This license automatically terminates if User breaches any term of this Agreement. Upon termination, User must immediately cease using the Software and delete all copies.
+
+8. Governing Law
+   This Agreement is governed by the laws of the People's Republic of China, without regard to its conflict of law principles.
+
+9. Entire Agreement
+   This Agreement constitutes the entire agreement between the parties regarding the Software and supersedes all prior oral or written agreements.
+
+10. Contact Information
+    For any questions, please contact: https://cn.widgetstore.net
+
+Last updated: January 2024
