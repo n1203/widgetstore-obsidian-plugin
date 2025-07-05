@@ -1,0 +1,186 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Determine version bump
+        id: version
+        run: |
+          # Get the last tag
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "Last tag: $LAST_TAG"
+          
+          # Get commits since last tag
+          if [ "$LAST_TAG" = "v0.0.0" ]; then
+            COMMITS=$(git log --pretty=format:"%s" --no-merges)
+          else
+            COMMITS=$(git log ${LAST_TAG}..HEAD --pretty=format:"%s" --no-merges)
+          fi
+          
+          # Determine version bump type
+          BUMP_TYPE="patch"
+          
+          # Check for breaking changes
+          if echo "$COMMITS" | grep -i "BREAKING CHANGE\|!:" > /dev/null; then
+            BUMP_TYPE="major"
+          # Check for features
+          elif echo "$COMMITS" | grep -i "^feat\|^feature" > /dev/null; then
+            BUMP_TYPE="minor"
+          fi
+          
+          echo "Bump type: $BUMP_TYPE"
+          echo "bump_type=$BUMP_TYPE" >> $GITHUB_OUTPUT
+
+      - name: Bump version
+        id: bump_version
+        run: |
+          # Update version based on bump type
+          npm version ${{ steps.version.outputs.bump_type }} --no-git-tag-version
+          
+          # Get the new version
+          NEW_VERSION=$(node -p "require('./package.json').version")
+          echo "New version: $NEW_VERSION"
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          
+          # Run version script to update manifest.json and versions.json
+          npm run version
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          # Get the new version
+          NEW_VERSION="${{ steps.bump_version.outputs.new_version }}"
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          
+          # Create changelog header
+          echo "## 🎉 Release v$NEW_VERSION" > RELEASE_NOTES.md
+          echo "" >> RELEASE_NOTES.md
+          echo "### 📅 $(date +'%Y-%m-%d')" >> RELEASE_NOTES.md
+          echo "" >> RELEASE_NOTES.md
+          
+          # Get commits and categorize them
+          if [ -z "$LAST_TAG" ]; then
+            COMMITS=$(git log --pretty=format:"%s|%h" --no-merges)
+          else
+            COMMITS=$(git log ${LAST_TAG}..HEAD --pretty=format:"%s|%h" --no-merges)
+          fi
+          
+          # Features
+          FEATURES=$(echo "$COMMITS" | grep -i "^feat\|^feature" || true)
+          if [ ! -z "$FEATURES" ]; then
+            echo "### ✨ 新功能 (Features)" >> RELEASE_NOTES.md
+            echo "$FEATURES" | while IFS='|' read -r msg hash; do
+              echo "- $msg ([${hash}](https://github.com/${{ github.repository }}/commit/${hash}))" >> RELEASE_NOTES.md
+            done
+            echo "" >> RELEASE_NOTES.md
+          fi
+          
+          # Bug fixes
+          FIXES=$(echo "$COMMITS" | grep -i "^fix" || true)
+          if [ ! -z "$FIXES" ]; then
+            echo "### 🐛 修复 (Bug Fixes)" >> RELEASE_NOTES.md
+            echo "$FIXES" | while IFS='|' read -r msg hash; do
+              echo "- $msg ([${hash}](https://github.com/${{ github.repository }}/commit/${hash}))" >> RELEASE_NOTES.md
+            done
+            echo "" >> RELEASE_NOTES.md
+          fi
+          
+          # Documentation
+          DOCS=$(echo "$COMMITS" | grep -i "^docs" || true)
+          if [ ! -z "$DOCS" ]; then
+            echo "### 📚 文档 (Documentation)" >> RELEASE_NOTES.md
+            echo "$DOCS" | while IFS='|' read -r msg hash; do
+              echo "- $msg ([${hash}](https://github.com/${{ github.repository }}/commit/${hash}))" >> RELEASE_NOTES.md
+            done
+            echo "" >> RELEASE_NOTES.md
+          fi
+          
+          # Other changes
+          OTHERS=$(echo "$COMMITS" | grep -v -i "^feat\|^feature\|^fix\|^docs" || true)
+          if [ ! -z "$OTHERS" ]; then
+            echo "### 🔧 其他变更 (Other Changes)" >> RELEASE_NOTES.md
+            echo "$OTHERS" | while IFS='|' read -r msg hash; do
+              echo "- $msg ([${hash}](https://github.com/${{ github.repository }}/commit/${hash}))" >> RELEASE_NOTES.md
+            done
+            echo "" >> RELEASE_NOTES.md
+          fi
+          
+          # Update CHANGELOG.md
+          if [ -f "CHANGELOG.md" ]; then
+            # Insert new release notes at the beginning
+            echo -e "# 变更日志 (Changelog)\n" > CHANGELOG_NEW.md
+            cat RELEASE_NOTES.md >> CHANGELOG_NEW.md
+            echo -e "\n---\n" >> CHANGELOG_NEW.md
+            tail -n +2 CHANGELOG.md >> CHANGELOG_NEW.md
+            mv CHANGELOG_NEW.md CHANGELOG.md
+          else
+            echo -e "# 变更日志 (Changelog)\n" > CHANGELOG.md
+            cat RELEASE_NOTES.md >> CHANGELOG.md
+          fi
+
+      - name: Build
+        run: yarn build
+
+      - name: Create release package
+        run: |
+          mkdir -p dist
+          cp main.js manifest.json styles.css dist/
+          cd dist
+          zip -r ../widgetstore-${{ steps.bump_version.outputs.new_version }}.zip *
+
+      - name: Commit version changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add package.json manifest.json versions.json CHANGELOG.md
+          git commit -m "chore: release v${{ steps.bump_version.outputs.new_version }} [skip ci]"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          tags: false
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: v${{ steps.bump_version.outputs.new_version }}
+          name: Release v${{ steps.bump_version.outputs.new_version }}
+          bodyFile: RELEASE_NOTES.md
+          artifacts: |
+            widgetstore-${{ steps.bump_version.outputs.new_version }}.zip
+            main.js
+            manifest.json
+            styles.css
+          draft: false
+          prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Clean up
+        run: rm -f RELEASE_NOTES.md widgetstore-*.zip

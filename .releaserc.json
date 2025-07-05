@@ -1,0 +1,19 @@
+{
+  "branches": ["main"],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    "@semantic-release/npm",
+    "@semantic-release/github",
+    "@semantic-release/git"
+  ],
+  "preset": "angular",
+  "releaseRules": [
+    { "type": "feat", "release": "minor" },
+    { "type": "fix", "release": "patch" },
+    { "type": "perf", "release": "patch" },
+    { "breaking": true, "release": "major" },
+    { "revert": true, "release": "patch" }
+  ]
+}

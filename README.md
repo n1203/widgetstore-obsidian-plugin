@@ -1,5 +1,9 @@
 # Widget Store for Obsidian
 
+[![Build and Release](https://github.com/yourusername/widgetstore-obsidian/actions/workflows/release.yml/badge.svg)](https://github.com/yourusername/widgetstore-obsidian/actions/workflows/release.yml)
+[![Latest Release](https://img.shields.io/github/v/release/yourusername/widgetstore-obsidian)](https://github.com/yourusername/widgetstore-obsidian/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/yourusername/widgetstore-obsidian/total)](https://github.com/yourusername/widgetstore-obsidian/releases)
+
 将[组件世界](https://cn.widgetstore.net)的丰富组件资源直接集成到 Obsidian 中。
 
 ## 功能特性
@@ -15,8 +19,8 @@
 
 ### 手动安装
 
-1. 下载最新的 Release
-2. 解压到 Obsidian 插件目录：`<vault>/.obsidian/plugins/widgetstore-obsidian/`
+1. 从 [Releases](https://github.com/yourusername/widgetstore-obsidian/releases/latest) 下载最新版本
+2. 解压 `widgetstore-*.zip` 到 Obsidian 插件目录：`<vault>/.obsidian/plugins/widgetstore/`
 3. 重启 Obsidian
 4. 在设置中启用插件
 
@@ -117,16 +121,20 @@ widgetstore-obsidian/
 │   │   ├── widget.ts   # 组件相关
 │   │   └── types.ts    # 类型定义
 │   └── views/          # 视图组件
-│       ├── WidgetBrowser.ts  # 组件浏览器
-│       └── WidgetManager.ts  # 个人组件管理
+│       └── MyWidgets.ts      # 统一的组件管理视图
 ├── styles.css          # 样式文件
 └── manifest.json       # 插件配置
 ```
+
+## 贡献
+
+欢迎提交 Issue 和 Pull Request！请查看 [贡献指南](CONTRIBUTING.md) 了解提交规范。
 
 ## 反馈与支持
 
 - 问题反馈：[GitHub Issues](https://github.com/yourusername/widgetstore-obsidian/issues)
 - 组件世界官网：[https://cn.widgetstore.net](https://cn.widgetstore.net)
+- 变更日志：[CHANGELOG.md](CHANGELOG.md)
 
 ## 许可证
 
