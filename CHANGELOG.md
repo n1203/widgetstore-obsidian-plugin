@@ -1,5 +1,20 @@
 # 变更日志 (Changelog)
 
+## 🎉 Release v1.0.1
+
+### 📅 2025-07-05
+
+### 🔧 其他变更 (Other Changes)
+- 更新.gitignore文件以包含新的环境文件、日志、测试覆盖率、临时文件和分发文件的忽略规则；更新README.md文件，添加构建和发布徽章，更新手动安装说明，新增贡献和变更日志部分。 ([3b934ce](https://github.com/kuai-dian/obsidian/commit/3b934ce))
+- 优化组件预览功能，添加用户组件信息获取逻辑，更新iframe加载方式并处理加载失败情况；新增模态框样式，支持复制组件代码功能。 ([6e8fe03](https://github.com/kuai-dian/obsidian/commit/6e8fe03))
+- 更新WidgetService类，修改API请求方式为POST，重构请求参数构建逻辑，优化请求体格式以支持新的数据结构。 ([b1b14c6](https://github.com/kuai-dian/obsidian/commit/b1b14c6))
+- 重构组件视图，移除旧的组件浏览器和管理器，新增“我的组件”视图。更新样式以支持视图切换和搜索框，添加获取组件列表和添加用户组件的新API。 ([e4e0439](https://github.com/kuai-dian/obsidian/commit/e4e0439))
+- 请提供文件的di ([40c0697](https://github.com/kuai-dian/obsidian/commit/40c0697))
+
+
+---
+
+
 所有重要的变更都会记录在此文件中。
 
 本项目遵循 [语义化版本](https://semver.org/lang/zh-CN/) 规范。
