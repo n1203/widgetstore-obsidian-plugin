@@ -3,8 +3,20 @@
 [![Build and Release](https://github.com/yourusername/widgetstore-obsidian/actions/workflows/release.yml/badge.svg)](https://github.com/yourusername/widgetstore-obsidian/actions/workflows/release.yml)
 [![Latest Release](https://img.shields.io/github/v/release/yourusername/widgetstore-obsidian)](https://github.com/yourusername/widgetstore-obsidian/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/yourusername/widgetstore-obsidian/total)](https://github.com/yourusername/widgetstore-obsidian/releases)
+[![GitHub Stars](https://img.shields.io/github/stars/yourusername/widgetstore-obsidian?style=social)](https://github.com/yourusername/widgetstore-obsidian/stargazers)
+[![License](https://img.shields.io/github/license/yourusername/widgetstore-obsidian)](https://github.com/yourusername/widgetstore-obsidian/blob/main/LICENSE)
 
 将[组件世界](https://cn.widgetstore.net)的丰富组件资源直接集成到 Obsidian 中。
+
+<div align="center">
+  
+  **如果这个项目对你有帮助，请给个 Star ⭐ 支持一下！**
+  
+  <a href="https://github.com/yourusername/widgetstore-obsidian/stargazers">
+    <img src="https://img.shields.io/github/stars/yourusername/widgetstore-obsidian?style=for-the-badge&logo=github&color=yellow" alt="GitHub stars">
+  </a>
+  
+</div>
 
 ## 功能特性
 
