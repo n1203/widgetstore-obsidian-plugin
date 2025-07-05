@@ -170,8 +170,8 @@ jobs:
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
-          tag: v${{ steps.bump_version.outputs.new_version }}
-          name: Release v${{ steps.bump_version.outputs.new_version }}
+          tag: ${{ steps.bump_version.outputs.new_version }}
+          name: ${{ steps.bump_version.outputs.new_version }}
           bodyFile: RELEASE_NOTES.md
           artifacts: |
             widgetstore-${{ steps.bump_version.outputs.new_version }}.zip
