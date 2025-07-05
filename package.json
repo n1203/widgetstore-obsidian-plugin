@@ -1,6 +1,6 @@
 {
   "name": "widgetstore-obsidian",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Widget Store integration for Obsidian - Access and manage widgets from cn.widgetstore.net",
   "main": "main.js",
   "scripts": {
