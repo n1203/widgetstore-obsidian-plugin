@@ -1,5 +1,16 @@
 # 变更日志 (Changelog)
 
+## 🎉 Release v1.0.5
+
+### 📅 2025-07-05
+
+### 🔧 其他变更 (Other Changes)
+- chore: 更新发布工作流，简化版本标签和名称的引用方式 ([8d4d98c](https://github.com/n1203/widgetstore-obsidian-plugin/commit/8d4d98c))
+
+
+---
+
+
 ## 🎉 Release v1.0.4
 
 ### 📅 2025-07-05
