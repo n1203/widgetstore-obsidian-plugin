@@ -12,6 +12,7 @@ import { AuthService } from './src/api/auth';
 import { WidgetService } from './src/api/widget';
 import { AuthToken, User } from './src/api/types';
 import { MyWidgetsView, VIEW_TYPE_MY_WIDGETS } from './src/views/MyWidgets';
+import { ImportModal, importFromWidgetStore, tr } from './src/import';
 
 interface WidgetStoreSettings {
     authToken?: AuthToken;
@@ -70,6 +71,16 @@ export default class WidgetStorePlugin extends Plugin {
             callback: () => {
                 this.authService.startLogin();
             }
+        });
+
+        // AI 搭空间：从组件世界导入整个空间（网站「导出到 Obsidian」→ obsidian://widgetstore-import?t=…&api=…）
+        this.addCommand({
+            id: 'import-space-from-widgetstore',
+            name: tr('command'),
+            callback: () => new ImportModal(this.app).open()
+        });
+        this.registerObsidianProtocolHandler('widgetstore-import', async (params) => {
+            await importFromWidgetStore(this.app, params.t || '', params.api || 'https://widgetstore.net/widget/api');
         });
 
         // 注册 URL 协议处理器
